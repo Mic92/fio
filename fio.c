@@ -42,6 +42,12 @@ int main(int argc, char *argv[], char *envp[])
 	if (parse_options(argc, argv))
 		goto done_key;
 
+	const char *args[3];
+	args[0] = "blktrace";
+	args[1] = "/dev/spdk0";
+
+	blktrace_start(2, args);
+
 	/*
 	 * line buffer stdout to avoid output lines from multiple
 	 * threads getting mixed
@@ -63,5 +69,6 @@ done_key:
 	fio_server_destroy_sk_key();
 done:
 	deinitialize_fio();
+	blktrace_stop();
 	return ret;
 }

@@ -215,7 +215,10 @@ endif
 
 OBJS := $(SOURCE:.c=.o)
 
-FIO_OBJS = $(OBJS) fio.o
+blktrace/blktrace.a:
+	$(MAKE) -C blktrace blktrace.a
+
+FIO_OBJS = $(OBJS) fio.o blktrace/blktrace.a
 
 GFIO_OBJS = $(OBJS) gfio.o graph.o tickmarks.o ghelpers.o goptions.o gerror.o \
 			gclient.o gcompat.o cairo_text_helpers.o printing.o
@@ -361,7 +364,7 @@ endif
 
 all: $(PROGS) $(T_TEST_PROGS) $(UT_PROGS) $(SCRIPTS) FORCE
 
-.PHONY: all install clean test
+.PHONY: all install clean test blktrace/blktrace.a
 .PHONY: FORCE cscope
 
 FIO-VERSION-FILE: FORCE
