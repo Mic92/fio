@@ -2193,13 +2193,13 @@ static int do_sync_file_range(const struct thread_data *td,
 
 int do_io_u_sync(const struct thread_data *td, struct io_u *io_u)
 {
-	int ret;
+	int ret = 0;
 
 	if (io_u->ddir == DDIR_SYNC) {
-		ret = fsync(io_u->file->fd);
+		//ret = fsync(io_u->file->fd);
 	} else if (io_u->ddir == DDIR_DATASYNC) {
 #ifdef CONFIG_FDATASYNC
-		ret = fdatasync(io_u->file->fd);
+		//ret = fdatasync(io_u->file->fd);
 #else
 		ret = io_u->xfer_buflen;
 		io_u->error = EINVAL;

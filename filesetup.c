@@ -233,10 +233,10 @@ static int extend_file(struct thread_data *td, struct fio_file *f)
 		dprint(FD_FILE, "terminate unlink %s\n", f->file_name);
 		td_io_unlink_file(td, f);
 	} else if (td->o.create_fsync) {
-		if (fsync(f->fd) < 0) {
-			td_verror(td, errno, "fsync");
-			goto err;
-		}
+		//if (fsync(f->fd) < 0) {
+		//	td_verror(td, errno, "fsync");
+		//	goto err;
+		//}
 	}
 	if (td->o.fill_device && !td_write(td)) {
 		fio_file_clear_size_known(f);
@@ -494,7 +494,8 @@ static int __file_invalidate_cache(struct thread_data *td, struct fio_file *f,
 	} else if (f->filetype == FIO_TYPE_FILE) {
 		dprint(FD_IO, "declare unneeded cache %s: %llu/%llu\n",
 			f->file_name, off, len);
-		ret = posix_fadvise(f->fd, off, len, POSIX_FADV_DONTNEED);
+		//ret = posix_fadvise(f->fd, off, len, POSIX_FADV_DONTNEED);
+    ret = 0;
 		if (ret)
 			errval = ret;
 	} else if (f->filetype == FIO_TYPE_BLOCK) {
