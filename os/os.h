@@ -181,7 +181,9 @@ typedef unsigned int socklen_t;
 #endif
 
 #ifndef FIO_OS_HAS_CTIME_R
-#define os_ctime_r(x, y, z)     (void) ctime_r((x), (y))
+//XXX somehow crashe on my system
+//#define os_ctime_r(x, y, z)     (void) ctime_r((x), (y))
+#define os_ctime_r(x, y, z) (void) strncpy((y), "Thu Jan  1 01:00:00 1970", (z))
 #endif
 
 #ifdef FIO_USE_GENERIC_SWAP
