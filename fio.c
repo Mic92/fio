@@ -27,6 +27,8 @@ int main(int argc, char *argv[], char *envp[])
 {
 	int ret = 1;
 
+	fprintf(stderr, "%s:%d [fio]\n", __FILE__, __LINE__);
+
 	compiletime_assert(TD_NR <= TD_ENG_FLAG_SHIFT, "TD_ENG_FLAG_SHIFT");
 
 	if (initialize_fio(envp))
