@@ -1724,8 +1724,9 @@ static void *thread_main(void *data)
 
 	errno = 0;
 	if (nice(o->nice) == -1 && errno != 0) {
-		td_verror(td, errno, "nice");
-		goto err;
+    fprintf(stderr, "nice(): %s\n", strerror(errno));
+		//td_verror(td, errno, "nice");
+		//goto err;
 	}
 
 	if (o->ioscheduler && switch_ioscheduler(td))
